@@ -18,22 +18,3 @@ export type LibraryBook = Book & {
   status: ReadingStatus;
   addedAt: string;
 };
-
-export type User = {
-  id: string;
-  email: string;
-  passwordHash: string;
-  createdAt: string;
-};
-
-export type Session = {
-  tokenHash: string;
-  userId: string;
-  expiresAt: string;
-};
-
-export type Store = {
-  users: User[];
-  sessions: Session[];
-  library: Array<LibraryBook & { userId: string }>;
-};

@@ -6,7 +6,7 @@ A quiet personal library powered by Google Books, with a visual language based o
 
 ```bash
 cp .env.example .env.local
-# Add a Google Books API key.
+# Add the Google Books key and Supabase project values.
 pnpm install
 pnpm dev
 ```
@@ -15,13 +15,22 @@ Open `http://localhost:3000`, create an account, and search for a book.
 
 ## Current slice
 
-- Email/password registration and signed, HTTP-only sessions
+- Supabase email/password authentication with cookie-backed SSR sessions
 - Google Books search through a server-side route (the key is never sent to the browser)
 - Want-to-read, reading, and finished shelves
 - Add, inspect, move, filter, and remove books
 - Defensive normalization for incomplete Google Books metadata
-- Local JSON persistence under `.data/`
+- Postgres persistence with per-user Row Level Security
 
-Local JSON storage is intentional for this first personal prototype. The persistence code is isolated in `lib/store.ts`; replace that adapter with Postgres or Supabase before a multi-instance deployment.
+## Database migration
 
-Authentication and catalogue throttles are process-local for the same reason. Set `TRUST_PROXY=true` only behind infrastructure that overwrites `X-Forwarded-For`; use a shared rate-limit store alongside the database migration for a multi-instance deployment.
+```bash
+supabase login
+supabase link --project-ref <project-id>
+supabase db push --dry-run
+supabase db push
+```
+
+The project ID is the value in `https://supabase.com/dashboard/project/<project-id>`. Linking also prompts for the database password; API keys alone cannot apply migrations.
+
+Authentication and catalogue throttles remain process-local. Set `TRUST_PROXY=true` only behind infrastructure that overwrites `X-Forwarded-For`; use a shared rate-limit store for a multi-instance deployment.
