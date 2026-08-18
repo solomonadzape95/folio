@@ -29,7 +29,7 @@ export async function authAction(_state: AuthState, formData: FormData): Promise
         password,
       });
       if (error) return { error: error.message };
-      if (!data.session) return { error: "The account was created, but a session could not be started." };
+      if (!data.session) return { error: "Email confirmation is still enabled in Supabase. Disable Confirm email and try again." };
       clearRateLimit("auth-identity", identity);
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password });

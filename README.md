@@ -33,4 +33,6 @@ supabase db push
 
 The project ID is the value in `https://supabase.com/dashboard/project/<project-id>`. Linking also prompts for the database password; API keys alone cannot apply migrations.
 
+Folio expects signup to create a session immediately. In a hosted Supabase project, open **Authentication → Sign In / Providers → Email** and disable **Confirm email**. This Auth setting is separate from the database schema and is not applied by `supabase db push`.
+
 Authentication and catalogue throttles remain process-local. Set `TRUST_PROXY=true` only behind infrastructure that overwrites `X-Forwarded-For`; use a shared rate-limit store for a multi-instance deployment.
