@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #08090a;
+  --surface: #0e1011;
+  --surface-2: #141718;
+  --line: #1f2426;
+  --line-strong: #30383a;
+  --text: #e8eaeb;
+  --muted: #899194;
+  --faint: #50585b;
+  --sage: #a7b7a4;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-sage: var(--sage);
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { border-radius: 0 !important; box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.stripe {
+  background-image: repeating-linear-gradient(45deg, var(--line) 0, var(--line) 1px, transparent 1px, transparent 7px);
+}
+.stripe-dense {
+  background-image: repeating-linear-gradient(45deg, var(--line-strong) 0, var(--line-strong) 1px, transparent 1px, transparent 4px);
+}
+.grid-bg {
+  background-image: linear-gradient(to right, var(--line) 1px, transparent 1px), linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 88px 88px;
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 82%);
+}
+button, select, a, label { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .5; }
+input, button, select { font: inherit; }
+input:focus, button:focus-visible, select:focus-visible, a:focus-visible {
+  outline: 1px solid var(--line-strong);
+  outline-offset: 2px;
+}
+::selection { background: var(--text); color: var(--bg); }
+.book-cover { box-shadow: 12px 12px 0 #0a0b0c, 13px 13px 0 var(--line); }
