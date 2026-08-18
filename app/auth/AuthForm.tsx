@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { authAction, type AuthState } from "./actions";
 
-export function AuthForm({ mode, initialError }: { mode: "login" | "signup"; initialError?: string }) {
+export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const [state, action, pending] = useActionState<AuthState, FormData>(authAction, {});
   const signup = mode === "signup";
   return (
@@ -18,8 +18,7 @@ export function AuthForm({ mode, initialError }: { mode: "login" | "signup"; ini
         <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-faint">Password</span>
         <input name="password" type="password" autoComplete={signup ? "new-password" : "current-password"} minLength={8} required className="mt-2 w-full border border-line bg-bg px-4 py-4 text-[15px] text-text placeholder:text-faint" placeholder="At least 8 characters" />
       </label>
-      {state.error || initialError ? <p role="alert" className="border-l border-sage pl-4 text-sm leading-relaxed text-muted">{state.error ?? initialError}</p> : null}
-      {state.message ? <p role="status" className="border-l border-sage pl-4 text-sm leading-relaxed text-muted">{state.message}</p> : null}
+      {state.error ? <p role="alert" className="border-l border-sage pl-4 text-sm leading-relaxed text-muted">{state.error}</p> : null}
       <button disabled={pending} className="stripe-dense w-full border border-line-strong px-6 py-4 font-mono text-[11px] uppercase tracking-[0.24em] transition hover:bg-line">
         {pending ? "Working…" : signup ? "Create account" : "Enter library"}
       </button>
