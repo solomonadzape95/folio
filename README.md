@@ -17,6 +17,7 @@ Open `http://localhost:3000`, create an account, and search for a book.
 
 - Supabase email/password authentication with cookie-backed SSR sessions
 - Google Books search through a server-side route (the key is never sent to the browser)
+- In-app Google Books previews with a fallback for editions that cannot be embedded
 - Want-to-read, reading, and finished shelves
 - Add, inspect, move, filter, and remove books
 - Defensive normalization for incomplete Google Books metadata
@@ -36,3 +37,5 @@ The project ID is the value in `https://supabase.com/dashboard/project/<project-
 Folio expects signup to create a session immediately. In a hosted Supabase project, open **Authentication → Sign In / Providers → Email** and disable **Confirm email**. This Auth setting is separate from the database schema and is not applied by `supabase db push`.
 
 Authentication and catalogue throttles remain process-local. Set `TRUST_PROXY=true` only behind infrastructure that overwrites `X-Forwarded-For`; use a shared rate-limit store for a multi-instance deployment.
+
+Preview availability is controlled by Google Books and varies by edition and region. Publisher-approved titles expose sample pages; public-domain titles may expose the complete text.
